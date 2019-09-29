@@ -6,11 +6,17 @@
 	<div class="header">
       <h2>My To Do List</h2>
       <form method="post" action="{{ path('create_task') }}">
-        <input type="text" id="myInput" placeholder="Task title..." />
+        <input name="title" type="text" id="myInput" placeholder="Task title..." />
         <button type="submit" class="addBtn">Add a task</button>
       </form>
     </div>
     <ul>
+      {% for task in tasks %}
+        <li>
+          <a href="{{ path('switch_status', {'id_task': task.id}) }}"> <span class="task-list-item">{{ task.title }} </span> </a
+          ><a onclick="return confirm('Are you sure to delete?')" href="{{ path('delete', {'id_task': task.id}) }}"><span class="close">X</span></a>
+        </li>
+      {% endfor %}
       <li>
         <a href="{{ path('switch_status', {'id_task': 1}) }}"> <span class="task-list-item">Do shopping </span> </a
         ><a onclick="return confirm('Are you sure to delete?')" href="{{ path('delete', {'id_task': 1}) }}"><span class="close">X</span></a>
